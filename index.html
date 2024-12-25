@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script>
+    var app = angular.module('loginApp', []);
+    
+    app.controller('loginCtrl', function() {
+      var vm = this;
+      vm.username = '';
+      vm.password = '';
+      vm.errorMessage = '';
+
+      vm.submitLogin = function() {
+        if (vm.username === 'admin' && vm.password === 'admin123') {
+          alert('Login successful!');
+          vm.errorMessage = '';
+        } else {
+          vm.errorMessage = 'Invalid username or password!';
+        }
+      };
+    });
+  </script>
+</head>
+<body ng-app="loginApp" ng-controller="loginCtrl as ctrl">
+
+  <div class="login-container">
+    <h2>Login</h2>
+    <form ng-submit="ctrl.submitLogin()">
+      <label for="username">Username:</label>
+      <input type="text" id="username" ng-model="ctrl.username" required>
+      
+      <label for="password">Password:</label>
+      <input type="password" id="password" ng-model="ctrl.password" required>
+      
+      <button type="submit">Login</button>
+    </form>
+
+    <div class="error-message" ng-if="ctrl.errorMessage">{{ctrl.errorMessage}}</div>
+  </div>
+
+</body>
+</html>
